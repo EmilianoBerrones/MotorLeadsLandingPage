@@ -1,11 +1,14 @@
 <template>
-  <q-page class="flex flex-center">
-    <img
-      alt="Quasar logo"
-      src="~assets/quasar-logo-vertical.svg"
-      style="width: 200px; height: 200px"
-    >
-  </q-page>
+  <q-page-container>
+    <q-page class="row justify-around items-center">
+      <div class="col-2">
+        <div class="col-2">uno</div>
+        <div class="col-2">dos</div>
+        <div class="col-2">tres</div>
+      </div>
+      <div class="col-2"> hola</div>
+    </q-page>
+  </q-page-container>
 </template>
 
 <script setup>
