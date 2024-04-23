@@ -6,7 +6,7 @@
  ```
  node -v
  ```
- ## Instalar VueJS
+ ## Instalar VueJs
 Una vez instalado NodeJS puedes instalar VueJS usando npm. Dentro de la terminal ejecuta el comando 
 ```
 npm install -g @vue/cli
@@ -19,7 +19,7 @@ vue --version
 Posteriormente usa el IDE de tu preferencia (nosotros usamos WebStorm para este proyecto). Abre la terminal y ejecuta los siguientes comandos
 ```
 cd mlpage
-npm run serve
+npx quasar dev
 ```
 - El primer comando es para ubicarte en la carpeta de mlpage y poder compilar el proyecto. 
 - El segundo comando es para compilar el proyecto para desarrollo. 
