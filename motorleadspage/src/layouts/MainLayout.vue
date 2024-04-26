@@ -12,9 +12,9 @@
       </q-toolbar>
 
       <q-tabs align="left">
-        <q-route-tab to="/" label="Page One"/>
-        <q-route-tab to="/" label="Page Two"/>
-        <q-route-tab to="/" label="Page Three"/>
+        <q-route-tab to="/" label="Login"/>
+        <q-route-tab to="/options" label="Escoger opciones"/>
+        <q-route-tab to="/price" label="Precio"/>
       </q-tabs>
     </q-header>
 
