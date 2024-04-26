@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <div class="row items-center justify-evenly" style="height: 1000px">
-      <div class="col-3">
+      <div class="col-3 col-md-5">
         <h2>Precios reales para transacciones reales</h2>
         <h6> Email </h6>
         <q-input outlined v-model="text"> </q-input>
@@ -21,7 +21,7 @@
         <q-btn class="glossy" color="primary" label="Iniciar sesión" style="width: 630px"></q-btn>
         <h6>¿Aún no tienes cuenta? <a href="/">Registrate para empezar</a></h6>
       </div>
-      <div class="col-3">
+      <div class="col-3 col-md-4">
         <h1>Imagen</h1>
       </div>
     </div>
