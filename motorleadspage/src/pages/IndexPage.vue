@@ -1,14 +1,31 @@
 <template>
-  <q-page-container>
-    <q-page class="row justify-around items-center">
-      <div class="col-2">
-        <div class="col-2">uno</div>
-        <div class="col-2">dos</div>
-        <div class="col-2">tres</div>
+  <q-page padding>
+    <div class="row items-center justify-evenly" style="height: 1000px">
+      <div class="col-3">
+        <h2>Precios reales para transacciones reales</h2>
+        <h6> Email </h6>
+        <q-input outlined v-model="text"> </q-input>
+        <h6> Contraseña </h6>
+        <q-input outlined v-model="text"> </q-input>
+
+        <div class="row">
+          <div class="col">
+            <h6>
+              <q-checkbox v-model="val" label="Recordarme"></q-checkbox>
+            </h6>
+          </div>
+          <div class="col">
+            <h6 style="padding-top: 5px"> <a href="/"> Olvide mi contraseña </a> </h6>
+          </div>
+        </div>
+        <q-btn class="glossy" color="primary" label="Iniciar sesión" style="width: 630px"></q-btn>
+        <h6>¿Aún no tienes cuenta? <a href="/">Registrate para empezar</a></h6>
       </div>
-      <div class="col-2"> hola</div>
-    </q-page>
-  </q-page-container>
+      <div class="col-3">
+        <h1>Imagen</h1>
+      </div>
+    </div>
+  </q-page>
 </template>
 
 <script setup>
