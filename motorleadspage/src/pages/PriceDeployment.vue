@@ -3,13 +3,13 @@
     <h2 class="text-center">Cotización</h2>
     <q-splitter
       v-model="splitterModel"
-      style="height: 200px">
+      style="height: auto">
 
       <template v-slot:before>
         <q-tabs
           v-model="tab"
           vertical
-          class="text-grey-8">
+          class="text-grey-7">
           <q-tab name="vehículo" icon="directions_car" label="Vehículo"/>
           <q-tab name="precio" icon="attach_money" label="Precio"/>
         </q-tabs>

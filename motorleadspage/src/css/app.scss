@@ -1,1 +1,10 @@
 // app global css in SCSS form
+@font-face {
+  font-family: GothamPro-Black;
+  src: url(./fonts/GothamPro-Black.woff);
+}
+
+// declare a class which applies it
+.my-font {
+  font-family: 'GothamPro-Black', serif;
+}

@@ -1,11 +1,11 @@
 <template>
   <q-layout view="hHh lpR fFf">
 
-    <q-header elevated class="bg-dark text-white" height-hint="98">
+    <q-header elevated class="bg-dark text-white" height-hint="98" style="font-family: 'GothamPro-Black', serif">
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
-            <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+            <img src="/motorleadspage/src/assets/motor-leads-logo.png">
           </q-avatar>
           MotorLeads
         </q-toolbar-title>
