@@ -1,6 +1,10 @@
 <template>
-  <q-page padding>
-    <div class="row items-center justify-center" style="height: 80vh">
+  <q-page style="background-color: black" padding>
+    <div class="row items-center justify-center q-mx-auto"
+         :style="{height: '85vh',
+         maxWidth: '70%',
+         backgroundColor:'white',
+         borderRadius:'16px'}">
       <div class="col-4">
         <h5>Selecciona una marca</h5>
         <q-btn-dropdown class="full-width"></q-btn-dropdown>

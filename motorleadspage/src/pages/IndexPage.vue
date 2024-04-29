@@ -28,8 +28,20 @@
         <q-btn class="glossy full-width" color="primary" label="Iniciar sesión"></q-btn>
         <h6>¿Aún no tienes cuenta? <a href="/">Registrate para empezar</a></h6>
       </div>
-      <div class="col-xl-3 col-md-4">
-        <h1>Imagen</h1>
+      <div class="col-xl-3 col-md-4" :style="{
+        height:'60vh',
+        width:'50vh',
+        borderRadius:'26px',
+        position:'relative'}">
+        <div class="gradient-personalizado">
+          <div class="contenedor-gradients">
+            <div class="g1"></div>
+            <div class="g2"></div>
+            <div class="g3"></div>
+            <div class="g4"></div>
+            <div class="g5"></div>
+          </div>
+        </div>
       </div>
     </div>
   </q-page>
