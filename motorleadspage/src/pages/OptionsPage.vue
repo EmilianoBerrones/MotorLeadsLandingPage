@@ -1,5 +1,12 @@
 <template>
-  <q-page style="background-color: black" padding>
+  <q-page padding class="gradient-personalizado">
+    <div class="contenedor-gradients">
+      <div class="g1"></div>
+      <div class="g2"></div>
+      <div class="g3"></div>
+      <div class="g4"></div>
+      <div class="g5"></div>
+    </div>
     <div class="row items-center justify-center q-mx-auto"
          :style="{height: '85vh',
          maxWidth: '70%',
