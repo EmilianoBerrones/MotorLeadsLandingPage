@@ -5,7 +5,7 @@
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
-            <img src="/motorleadspage/src/assets/motor-leads-logo.png">
+            <img src="https://images.crunchbase.com/image/upload/c_pad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/fl5lsnl1nurd4ywuukld">
           </q-avatar>
           MotorLeads
         </q-toolbar-title>
