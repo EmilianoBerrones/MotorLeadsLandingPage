@@ -2,7 +2,13 @@
   <q-page padding>
     <div class="row justify-center">
       <div class="col-8">
-        <h2 style="font-family: 'GothamPro-Black', serif">Vehículo</h2>
+        <h2 :style="{
+          fontFamily: '\'GothamPro-Black\', serif',
+          backgroundColor:'#f36c2a',
+          backgroundClip: 'text',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'}">
+          Vehículo </h2>
         <q-splitter
           v-model="splitterModel"
           style="height: auto">

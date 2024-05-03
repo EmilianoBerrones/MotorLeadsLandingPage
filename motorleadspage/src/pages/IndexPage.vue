@@ -4,7 +4,7 @@
       <div class="col-xl-3 col-md-5">
         <h2 :style="{
           fontFamily: '\'GothamPro-Black\', serif',
-          backgroundImage: 'linear-gradient(to right, #f44336, #F30B6A)',
+          backgroundColor:'#f36c2a',
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'}">
@@ -25,7 +25,7 @@
             <h6 style="padding-top: 5px"><a href="/"> Olvide mi contraseña </a></h6>
           </div>
         </div>
-        <q-btn class="glossy full-width" color="primary" label="Iniciar sesión"></q-btn>
+        <q-btn class="full-width" style="background: #BABABA; color: darkblue" label="Iniciar sesión"></q-btn>
         <h6>¿Aún no tienes cuenta? <a href="/">Registrate para empezar</a></h6>
       </div>
       <div class="col-xl-3 col-md-4" :style="{
