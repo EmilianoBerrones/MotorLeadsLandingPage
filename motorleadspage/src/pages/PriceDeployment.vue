@@ -54,25 +54,76 @@
           </template>
 
         </q-splitter>
+        <div>
+          <canvas id="myChart" width="400" height="400"></canvas> <!-- Añadimos el lienzo de la gráfica -->
+        </div>
         <div style="padding: 20px">
           <q-img :style="{borderRadius:'40px'}" src="https://www.diariomotor.com/imagenes/2015/03/tesla-model-x-9.jpg" :ratio="16/9"/>
         </div>
-        <q-btn color="blue-8" glossy size="lg" label="Cotizar nuevo vehículo"></q-btn>
+        <q-btn color="blue-8" glossy size="lg" label="Cotizar nuevo vehículo" @click="redirectToPage"></q-btn>
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
-import {ref} from 'vue'
+import { ref, onMounted } from 'vue';
+import Chart from 'chart.js/auto';
+import { useRouter } from 'vue-router'; // Importa la utilidad de enrutamiento de Quasar
 
 export default {
   name: "PriceDeployment",
   setup() {
+    const tab = ref('precio');
+    const splitterModel = ref(20);
+    const router = useRouter(); // Obtiene el enrutador de Quasar
+
+    // Datos de ejemplo para la gráfica
+    const chartData = {
+      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+      datasets: [{
+        label: 'Ventas mensuales',
+        data: [65, 59, 80, 81, 56, 55],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    // Función para crear la gráfica
+    const createChart = () => {
+      const ctx = document.getElementById('myChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: chartData,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    };
+
+    // Función para redireccionar a la página específica
+    const redirectToPage = () => {
+      router.push('/options');
+    };
+
+    onMounted(createChart); // Llamar a la función createChart cuando el componente está montado
+
     return {
-      tab: ref('precio'),
-      splitterModel: ref(20)
-    }
+      tab,
+      splitterModel,
+      redirectToPage
+    };
   }
-}
+};
 </script>
