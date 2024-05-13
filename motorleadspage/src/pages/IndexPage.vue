@@ -10,23 +10,24 @@
           WebkitTextFillColor: 'transparent'}">
           Precios reales para transacciones reales
         </h2>
-        <h6 style="margin-bottom: 5px"> Email </h6>
-        <q-input outlined v-model="text"></q-input>
-        <h6 style="margin-bottom: 5px"> Contraseña </h6>
-        <q-input outlined v-model="text"></q-input>
-
-        <div class="row">
-          <div class="col">
-            <h6>
-              <q-checkbox v-model="val" label="Recordarme"></q-checkbox>
-            </h6>
+        <div>
+          <h6 style="margin-bottom: 5px">Email</h6>
+          <q-input outlined v-model="email"></q-input>
+          <h6 style="margin-bottom: 5px">Contraseña</h6>
+          <q-input outlined v-model="password" type="password"></q-input>
+          <div class="row">
+            <div class="col">
+              <h6>
+                <q-checkbox v-model="val" label="Recordarme"></q-checkbox>
+              </h6>
+            </div>
+            <div class="col">
+              <h6 style="padding-top: 5px"><a href="/"> Olvide mi contraseña </a></h6>
+            </div>
           </div>
-          <div class="col">
-            <h6 style="padding-top: 5px"><a href="/"> Olvide mi contraseña </a></h6>
-          </div>
+          <q-btn @click="login" class="full-width" style="background: #BABABA; color: darkblue" label="Iniciar sesión"></q-btn>
+          <h6>¿Aún no tienes cuenta? <a href="/">Registrate para empezar</a></h6>
         </div>
-        <q-btn class="full-width" style="background: #BABABA; color: darkblue" label="Iniciar sesión"></q-btn>
-        <h6>¿Aún no tienes cuenta? <a href="/">Registrate para empezar</a></h6>
       </div>
       <div class="col-xl-3 col-md-4" :style="{
         height:'60vh',
@@ -48,7 +49,25 @@
 </template>
 
 <script setup>
-defineOptions({
-  name: 'IndexPage'
-});
+  defineOptions({
+    name: 'IndexPage'
+  });
+
+  import { auth } from '../firebaseConfig'
+  import { ref } from 'vue'
+  import { signInWithEmailAndPassword } from 'firebase/auth'
+
+  const email = ref('')
+  const password = ref('')
+  const val = ref(false)
+
+  const login = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email.value, password.value)
+      // Si el inicio de sesión es exitoso, puedes redirigir a otra página o hacer otras operaciones aquí
+      console.log('Inicio de sesión exitoso')
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error.message)
+    }
+  }
 </script>
