@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
-    <div class="row justify-center">
-      <div class="col-8">
+    <div class="row justify-center items-center">
+      <div class="col" style="padding-left: 3vh">
         <h2 :style="{
           fontFamily: '\'GothamPro-Black\', serif',
           backgroundColor:'#f36c2a',
@@ -55,12 +55,12 @@
 
         </q-splitter>
         <div>
-          <canvas id="myChart" width="400" height="400"></canvas> <!-- Añadimos el lienzo de la gráfica -->
+          <canvas id="myChart" width="auto" height="120vh"></canvas> <!-- Añadimos el lienzo de la gráfica -->
         </div>
-        <div style="padding: 20px">
-          <q-img :style="{borderRadius:'40px'}" src="https://www.diariomotor.com/imagenes/2015/03/tesla-model-x-9.jpg" :ratio="16/9"/>
-        </div>
-        <q-btn color="blue-8" glossy size="lg" label="Cotizar nuevo vehículo" @click="redirectToPage"></q-btn>
+        <q-btn color="blue-8" size="lg" label="Cotizar nuevo vehículo" @click="redirectToPage"></q-btn>
+      </div>
+      <div class="col" style="padding-top: 10vh; padding-right: 2vh">
+        <q-img :style="{borderRadius:'40px'}" src="https://www.diariomotor.com/imagenes/2015/03/tesla-model-x-9.jpg" :ratio="16/9"/>
       </div>
     </div>
   </q-page>
