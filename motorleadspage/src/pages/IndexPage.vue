@@ -12,9 +12,17 @@
         </h2>
         <div>
           <h6 style="margin-bottom: 5px">Email</h6>
-          <q-input outlined v-model="email"></q-input>
+          <q-input outlined v-model="email" :rules="[emailRule]"></q-input>
           <h6 style="margin-bottom: 5px">Contraseña</h6>
-          <q-input outlined v-model="password" type="password"></q-input>
+          <q-input v-model="password" :type="isPwd ? 'password' : 'text'">
+            <template v-slot:append>
+              <q-icon
+                :name="isPwd ? 'visibility_off' : 'visibility'"
+                class="cursor-pointer"
+                @click="isPwd = !isPwd"
+              />
+            </template>
+          </q-input>
           <div class="row">
             <div class="col">
               <h6>
@@ -25,8 +33,8 @@
               <h6 style="padding-top: 5px"><a href="/"> Olvide mi contraseña </a></h6>
             </div>
           </div>
-          <q-btn @click="login" class="full-width" style="background: #BABABA; color: darkblue" label="Iniciar sesión"></q-btn>
-          <h6>¿Aún no tienes cuenta? <a href="/">Registrate para empezar</a></h6>
+          <q-btn @click="loginFirebase" class="full-width" style="background: #BABABA; color: darkblue" label="Iniciar sesión"></q-btn>
+          <br>
         </div>
       </div>
       <div class="col-xl-3 col-md-4" :style="{
@@ -49,25 +57,71 @@
 </template>
 
 <script setup>
-  defineOptions({
-    name: 'IndexPage'
-  });
+defineOptions({
+  name: 'IndexPage'
+});
+import { defineOptions } from 'vue';
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { auth } from '../firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
-  import { auth } from '../firebaseConfig'
-  import { ref } from 'vue'
-  import { signInWithEmailAndPassword } from 'firebase/auth'
+const email = ref("");
+const password = ref("");
+const val = ref(false);
+const router = useRouter();
+let isPwd = ref(true);
 
-  const email = ref('')
-  const password = ref('')
-  const val = ref(false)
+// Chequeo de email
+const emailRule = val => {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailPattern.test(val) || 'Por favor ingresa un email válido';
+};
 
-  const login = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email.value, password.value)
-      // Si el inicio de sesión es exitoso, puedes redirigir a otra página o hacer otras operaciones aquí
-      console.log('Inicio de sesión exitoso')
-    } catch (error) {
-      console.error('Error al iniciar sesión:', error.message)
+
+const loginAPI = async () => {
+  try {
+    // Realiza la solicitud POST a tu API
+    const response = await fetch('https://motorleads-api-d3e1b9991ce6.herokuapp.com/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+          email: email.value,
+          password: 'Password!'
+        }
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Error en la respuesta de la API');
     }
+    // Accede a los headers de la respuesta
+    const headers = response.headers;
+    const authToken = headers.get('Authorization'); // Ejemplo de cómo obtener un header específico
+
+    console.log('Headers:', headers);
+    console.log('Authorization Token:', authToken);
+
+    const data = await response.json();
+    console.log('Inicio de sesión exitoso', data);
+
+  } catch (error) {
+    console.error('Error al iniciar sesión:', error.message);
   }
+};
+
+const loginFirebase = async () => {
+  try {
+    await signInWithEmailAndPassword(auth, email.value, password.value)
+    console.log("Inicio de sesion exitoso")
+    await loginAPI();
+    router.push('/options')
+  } catch (error) {
+    console.error('Error al iniciar sesion: ', error.message)
+  }
+};
+// await signInWithEmailAndPassword(auth, email.value, password.value)
 </script>
