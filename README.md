@@ -1,3 +1,5 @@
+El siguiente contenido es nuestra solución para el reto de Desarrollo e Implantación de Sistemas de Software dirigido hacia la empresa MotorLeads.
+
 # Tabla de contenidos
 
 1. [Prerrequisitos](#prerrequisitos)
