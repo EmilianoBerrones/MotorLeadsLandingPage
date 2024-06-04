@@ -101,9 +101,11 @@ const loginAPI = async () => {
     // Accede a los headers de la respuesta
     const headers = response.headers;
     const authToken = headers.get('Authorization'); // Ejemplo de cómo obtener un header específico
+    localStorage.setItem('authToken',authToken);
 
     console.log('Headers:', headers);
     console.log('Authorization Token:', authToken);
+
 
     const data = await response.json();
     console.log('Inicio de sesión exitoso', data);
