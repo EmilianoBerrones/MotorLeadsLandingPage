@@ -10,7 +10,7 @@
           <div class="g5"></div>
         </div>
       </div>
-      <div class="row items-center justify-center q-mx-auto" :style="{ height: '214vh', maxWidth: '70%', backgroundColor: 'white', borderRadius: '16px', zIndex: 1 }">
+      <div class="row items-center justify-center q-mx-auto" :style="{ height: '200vh', maxWidth: '70%', backgroundColor: 'white', borderRadius: '16px', zIndex: 1 }">
         <div class="col-xl-6 col-md-8">
           <div v-if="$q.screen.xl || $q.screen.gt.lg" class="text-h5" style="padding-top: 25px; padding-bottom: 25px">Agrega el Levy</div>
           <div v-else class="text-h6" style="padding-top: 5px; padding-bottom: 5px">Agrega el Levy</div>
@@ -127,6 +127,8 @@ export default {
     const marcas = ref([]);
     const modelos = ref([]);
     const anios = ref([]);
+    let modelID = ref([]);
+    let yearID = ref([]);
 
     onMounted(async () => {
       await cargarMarcas();
@@ -180,6 +182,7 @@ export default {
     const seleccionarModelo = async (modelo) => {
       modeloSeleccionadoTexto.value = modelo.name;
       formData.value.Model = modelo.name.toUpperCase();
+      modelID.value = modelo.id
       await cargarAnios(modelo.id);
     };
 
@@ -203,6 +206,7 @@ export default {
     const seleccionarAnio = (anio) => {
       anioSeleccionadoTexto.value = anio.name;
       formData.value["Prod. year"] = parseInt(anio.name);
+      yearID.value = anio.id
     }
 
 
@@ -234,7 +238,6 @@ export default {
       formData.value.Cylinders = parseInt(formData.value.Cylinders)
       formData.value.Airbags = parseInt(formData.value.Airbags)
       formData.value.Turbo = parseInt(formData.value.Turbo)
-      console.log(JSON.stringify(formData.value))
       try {
         const response = await fetch('https://zn42ekkvhi.execute-api.us-east-2.amazonaws.com/default/motorleads', {
           method: 'POST',
@@ -252,7 +255,8 @@ export default {
         localStorage.setItem('carManu',formData.value.Manufacturer)
         localStorage.setItem('carModel',formData.value.Model)
         localStorage.setItem('carYear',formData.value["Prod. year"])
-        localStorage.setItem('carPrice',result.Price);
+        localStorage.setItem('carModelID',modelID.value)
+        localStorage.setItem('carYearID',yearID.value)
         router.push('/price');
       } catch (error) {
         console.error('Error:', error);
@@ -285,7 +289,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-/* tus estilos aquí */
-</style>

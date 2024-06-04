@@ -1,18 +1,18 @@
 <template>
   <q-page padding>
     <div class="row justify-center items-center">
-      <div class="col" style="padding-left: 3vh">
+      <div class="col-8" style="padding-left: 3vh">
         <h2 :style="{
           fontFamily: '\'GothamPro-Black\', serif',
           backgroundColor:'#f36c2a',
           backgroundClip: 'text',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'}">
-          Vehículo </h2>
+          Vehículo
+        </h2>
         <q-splitter
           v-model="splitterModel"
           style="height: auto">
-
           <template v-slot:before>
             <q-tabs
               v-model="tab"
@@ -22,7 +22,6 @@
               <q-tab name="precio" icon="attach_money" label="Precio"/>
             </q-tabs>
           </template>
-
           <template v-slot:after>
             <q-tab-panels
               v-model="tab"
@@ -35,7 +34,6 @@
                 <div class="text-h3 q-mb-md">Precio</div>
                 <p>${{ Math.fround(carPrice).toFixed(2) }} USD</p>
               </q-tab-panel>
-
               <q-tab-panel name="vehículo">
                 <div class="text-h3 q-mb-md">Vehículo</div>
                 <div style="display: flex; flex-direction: column; height: fit-content">
@@ -46,15 +44,14 @@
               </q-tab-panel>
             </q-tab-panels>
           </template>
-
         </q-splitter>
         <div>
           <canvas id="precioHistorico" width="auto" height="120vh"></canvas>
         </div>
         <q-btn color="blue-8" size="lg" label="Cotizar nuevo vehículo" @click="redirectToPage"></q-btn>
       </div>
-      <div class="col" style="padding-top: 10vh; padding-right: 2vh">
-        <q-img :style="{borderRadius:'40px'}" src="https://www.diariomotor.com/imagenes/2015/03/tesla-model-x-9.jpg" :ratio="16/9"/>
+      <div class="col-2" style="padding-top: 10vh; padding-right: 2vh">
+        <img v-if="baseurl" :src="baseurl" alt="Vehicle Image">
       </div>
     </div>
   </q-page>
@@ -63,20 +60,61 @@
 <script>
 import { ref, onMounted } from 'vue';
 import Chart from 'chart.js/auto';
-import { useRouter } from 'vue-router'; // Importa la utilidad de enrutamiento de Quasar
+import { useRouter } from 'vue-router';
 
 export default {
   name: "PriceDeployment",
   setup() {
     const tab = ref('precio');
     const splitterModel = ref(20);
-    const router = useRouter(); // Obtiene el enrutador de Quasar
-    const carPrice = localStorage.getItem("carPrice")
-    const carManu = localStorage.getItem("carManu")
-    const carModel = localStorage.getItem("carModel")
-    const carYear = localStorage.getItem("carYear")
+    const router = useRouter();
+    const carPrice = ref(localStorage.getItem("carPrice"));
+    const carManu = ref(localStorage.getItem("carManu"));
+    const carModel = ref(localStorage.getItem("carModel"));
+    const carYear = ref(localStorage.getItem("carYear"));
+    const carModelID = ref(localStorage.getItem('carModelID'));
+    const carYearID = ref(localStorage.getItem('carYearID'));
+    const version = ref(null);
+    const baseurl = ref(null);
+    const token = localStorage.getItem('authToken');
 
-    // Datos de ejemplo para la gráfica
+    onMounted(async () => {
+      await ObtenerIDVersion();
+      await ObtenerImagen();
+      createChart();
+    });
+
+    const ObtenerIDVersion = async () => {
+      try {
+        const options = {
+          headers: {
+            'Authorization': token
+          }
+        };
+        const response = await fetch(`https://motorleads-api-d3e1b9991ce6.herokuapp.com/api/v1/models/${carModelID.value}/years/${carYearID.value}/vehicles`, options);
+        const data = await response.json();
+        version.value = data[0].id;
+      } catch (error) {
+        console.error('Error al cargar las versiones:', error);
+      }
+    };
+
+    const ObtenerImagen = async () => {
+      try {
+        const options = {
+          headers: {
+            'Authorization': token
+          }
+        };
+        const response = await fetch(`https://motorleads-api-d3e1b9991ce6.herokuapp.com/api/v1/vehicles/${version.value}/pricing`, options);
+        const data = await response.json();
+        const imgurl = data.make_logo_url;
+        baseurl.value = 'https://drive.google.com/thumbnail?id=' + imgurl.substring(32);
+      } catch (error) {
+        console.error('Error al cargar las imágenes:', error);
+      }
+    };
+
     const chartData = {
       labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
       datasets: [{
@@ -94,7 +132,6 @@ export default {
       }]
     };
 
-    // Función para crear la gráfica
     const createChart = () => {
       const ctx = document.getElementById('precioHistorico').getContext('2d');
       new Chart(ctx, {
@@ -110,12 +147,9 @@ export default {
       });
     };
 
-    // Función para redireccionar a la página específica
     const redirectToPage = () => {
       router.push('/options');
     };
-
-    onMounted(createChart); // Llamar a la función createChart cuando el componente está montado
 
     return {
       tab,
@@ -125,6 +159,7 @@ export default {
       carModel,
       carManu,
       carYear,
+      baseurl
     };
   }
 };
