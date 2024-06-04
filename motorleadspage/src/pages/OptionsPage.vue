@@ -249,6 +249,10 @@ export default {
         }
         const result = await response.json();
         localStorage.setItem('carPrice',result.Price);
+        localStorage.setItem('carManu',formData.value.Manufacturer)
+        localStorage.setItem('carModel',formData.value.Model)
+        localStorage.setItem('carYear',formData.value["Prod. year"])
+        localStorage.setItem('carPrice',result.Price);
         router.push('/price');
       } catch (error) {
         console.error('Error:', error);

@@ -32,30 +32,24 @@
               transition-prev="jump-up"
               transition-next="jump-up">
               <q-tab-panel name="precio">
-                <div class="text-h4 q-mb-md">Precio</div>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure
-                  quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam.
-                  In, libero.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure
-                  quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam.
-                  In, libero.</p>
+                <div class="text-h3 q-mb-md">Precio</div>
+                <p>${{ Math.fround(carPrice).toFixed(2) }} USD</p>
               </q-tab-panel>
 
               <q-tab-panel name="vehículo">
-                <div class="text-h4 q-mb-md">Vehículo</div>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure
-                  quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam.
-                  In, libero.</p>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium cumque magnam odio iure
-                  quidem, quod illum numquam possimus obcaecati commodi minima assumenda consectetur culpa fuga nulla ullam.
-                  In, libero.</p>
+                <div class="text-h3 q-mb-md">Vehículo</div>
+                <div style="display: flex; flex-direction: column; height: fit-content">
+                  <p style="font-weight: bold; margin-bottom: 0">{{ carManu }}</p>
+                  <p style="margin: 0">{{ carModel }}</p>
+                  <p style="margin: 0">Año {{ carYear }}</p>
+                </div>
               </q-tab-panel>
             </q-tab-panels>
           </template>
 
         </q-splitter>
         <div>
-          <canvas id="myChart" width="auto" height="120vh"></canvas> <!-- Añadimos el lienzo de la gráfica -->
+          <canvas id="precioHistorico" width="auto" height="120vh"></canvas>
         </div>
         <q-btn color="blue-8" size="lg" label="Cotizar nuevo vehículo" @click="redirectToPage"></q-btn>
       </div>
@@ -77,6 +71,10 @@ export default {
     const tab = ref('precio');
     const splitterModel = ref(20);
     const router = useRouter(); // Obtiene el enrutador de Quasar
+    const carPrice = localStorage.getItem("carPrice")
+    const carManu = localStorage.getItem("carManu")
+    const carModel = localStorage.getItem("carModel")
+    const carYear = localStorage.getItem("carYear")
 
     // Datos de ejemplo para la gráfica
     const chartData = {
@@ -98,7 +96,7 @@ export default {
 
     // Función para crear la gráfica
     const createChart = () => {
-      const ctx = document.getElementById('myChart').getContext('2d');
+      const ctx = document.getElementById('precioHistorico').getContext('2d');
       new Chart(ctx, {
         type: 'line',
         data: chartData,
@@ -122,7 +120,11 @@ export default {
     return {
       tab,
       splitterModel,
-      redirectToPage
+      redirectToPage,
+      carPrice,
+      carModel,
+      carManu,
+      carYear,
     };
   }
 };
