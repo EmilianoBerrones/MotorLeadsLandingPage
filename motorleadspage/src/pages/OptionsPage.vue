@@ -116,9 +116,10 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-
+import { useRouter } from 'vue-router';
 export default {
   setup() {
+    const router = useRouter();
     const marcaSeleccionadaTexto = ref('');
     const modeloSeleccionadoTexto = ref('');
     const anioSeleccionadoTexto = ref('');
@@ -247,7 +248,8 @@ export default {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
-        console.log('Price:', result.Price);
+        localStorage.setItem('carPrice',result.Price);
+        router.push('/price');
       } catch (error) {
         console.error('Error:', error);
       }
