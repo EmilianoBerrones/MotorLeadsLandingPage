@@ -30,7 +30,7 @@
               </h6>
             </div>
             <div class="col">
-              <h6 style="padding-top: 5px"><a href="/"> Olvide mi contraseña </a></h6>
+              <h6 style="padding-top: 5px"><a href="#" @click.prevent="showResetPasswordDialog = true"> Olvidé mi contraseña </a></h6>
             </div>
           </div>
           <q-btn @click="loginFirebase" class="full-width" style="background: #BABABA; color: darkblue" label="Iniciar sesión"></q-btn>
@@ -53,24 +53,23 @@
         </div>
       </div>
     </div>
+    <ResetPasswordPopup v-model:showDialog="showResetPasswordDialog" />
   </q-page>
 </template>
 
 <script setup>
-defineOptions({
-  name: 'IndexPage'
-});
-import { defineOptions } from 'vue';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { auth } from '../firebaseConfig';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from 'firebase/auth';
+import ResetPasswordPopup from 'pages/ResetPasswordPopup.vue'; // Asegúrate de que esta ruta sea correcta
 
 const email = ref("");
 const password = ref("");
 const val = ref(false);
 const router = useRouter();
 let isPwd = ref(true);
+const showResetPasswordDialog = ref(false);
 
 // Chequeo de email
 const emailRule = val => {
@@ -78,10 +77,8 @@ const emailRule = val => {
   return emailPattern.test(val) || 'Por favor ingresa un email válido';
 };
 
-
 const loginAPI = async () => {
   try {
-    // Realiza la solicitud POST a tu API
     const response = await fetch('https://motorleads-api-d3e1b9991ce6.herokuapp.com/login', {
       method: 'POST',
       headers: {
@@ -98,14 +95,13 @@ const loginAPI = async () => {
     if (!response.ok) {
       throw new Error('Error en la respuesta de la API');
     }
-    // Accede a los headers de la respuesta
+
     const headers = response.headers;
-    const authToken = headers.get('Authorization'); // Ejemplo de cómo obtener un header específico
+    const authToken = headers.get('Authorization');
     localStorage.setItem('authToken',authToken);
 
     console.log('Headers:', headers);
     console.log('Authorization Token:', authToken);
-
 
     const data = await response.json();
     console.log('Inicio de sesión exitoso', data);
@@ -117,13 +113,13 @@ const loginAPI = async () => {
 
 const loginFirebase = async () => {
   try {
-    await signInWithEmailAndPassword(auth, email.value, password.value)
-    console.log("Inicio de sesion exitoso")
+    await signInWithEmailAndPassword(auth, email.value, password.value);
+    console.log("Inicio de sesion exitoso");
     await loginAPI();
-    router.push('/options')
+    router.push('/options');
   } catch (error) {
-    console.error('Error al iniciar sesion: ', error.message)
+    console.error('Error al iniciar sesion: ', error.message);
+    alert('El usuario o contraseña son incorrectos');
   }
 };
-// await signInWithEmailAndPassword(auth, email.value, password.value)
 </script>
