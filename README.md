@@ -9,6 +9,7 @@ Este documento tiene como propósito proporcionar a nuestro socio formador una g
 5. [Funcionalidades que atenderá el back-end](#funcionalidades-que-atenderá-el-back-end)
 6. [Endpoints, métodos HTTP, y estructura del body para cada funcionalidad](#endpoints-métodos-http-y-estructura-del-body-para-cada-funcionalidad)
 7. [Validaciones, códigos de error, y respuestas de los servicios asociados a cada funcionalidad.](#validaciones-códigos-de-error-y-respuestas-de-los-servicios-asociados-a-cada-funcionalidad)
+8. [Autores](#autores)
 
 # 1. Prerrequisitos
 
@@ -249,3 +250,9 @@ Validaciones:
 - 404 Not Found: No se encontraron datos para procesar.
 - 500 Internal Server Error: Error interno del servidor.
 
+# Autores
+- [Emiliano Berrones](https://github.com/EmilianoBerrones)
+- [Daniel Estrada](https://github.com/DanielEP96)
+- [Eduardo Castro](https://github.com/NeRvCobra)
+- [Daniel Méndez](https://github.com/DanielMB2003)
+- [Fernanda Zavala](https://github.com/FernandaZav)
