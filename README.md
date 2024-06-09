@@ -10,7 +10,7 @@ El siguiente contenido es nuestra solución para el reto de Desarrollo e Implant
 6. [Endpoints, métodos HTTP, y estructura del body para cada funcionalidad](#endpoints-métodos-http-y-estructura-del-body-para-cada-funcionalidad)
 7. [Validaciones, códigos de error, y respuestas de los servicios asociados a cada funcionalidad.](#validaciones-códigos-de-error-y-respuestas-de-los-servicios-asociados-a-cada-funcionalidad)
 
-# Prerrequisitos
+# 1. Prerrequisitos
 
 Esta es una página de inicio para MotorLeads y compañeros de semestres anteriores, construida con Quasar y Vue 3. Dentro
 de esta documentación, cada que se menciona el uso de una terminal estoy usando Windows Powershell, dentro de Windows.
@@ -79,14 +79,14 @@ Para habilitar la ejecución de scripts dentro del equipo (y evitar que suceda e
    era `vue --version`. <br>
    ![Imagen de ejecucion del comando de comprobacion](/images/comprobacion.png)
 
-# Descarga del repositorio y modo de uso
+# 2. Descarga del repositorio y modo de uso
 
 En la página de este proyecto, dale clic al botón que dice `< > Code`, y descarga el ZIP. <br>
 ![Imagen de descarga del ZIP dentro de GitHub](/images/downloadzip.png) <br>
 Posteriormente, usa el IDE de tu preferencia (nosotros usamos WebStorm para este proyecto). Y ubícate en la carpeta del
 proyecto (MotorLeadsLandingPage).
 
-# Visualizar en modo desarrollador
+# 3. Visualizar en modo desarrollador
 
 ## Si es la primera vez que inicializas el repositorio
 
@@ -109,7 +109,7 @@ quasar dev
 
 Ejecuta solamente el primer y el último comando: `cd motorleadspage` y `quasar dev`.
 
-# Funcionalidades que atiende el modelo
+# 4. Funcionalidades que atiende el modelo
 
 Las diversas funcionalidades que deben atender los servicios web del proyecto CEPAI (Car Estimated Pricing using
 Artificial Intelligence) incluyen:
@@ -140,7 +140,7 @@ Documentación y Soporte:
 
 - Proporcionar documentación detallada de la API y sus servicios para facilitar su integración y uso.
 
-# Funcionalidades que atenderá el back-end
+# 5. Funcionalidades que atenderá el back-end
 
 ### Login
 
@@ -159,7 +159,7 @@ Documentación y Soporte:
 Mostrar gráficas y precio correcto al momento de mandar los datos en la página anterior
 Cálculo del costo con los datos presentados
 
-# Endpoints, métodos HTTP, y estructura del body para cada funcionalidad
+# 6. Endpoints, métodos HTTP, y estructura del body para cada funcionalidad
 
 Nuestra API tiene como función básica el ingreso de datos a través de un JSON, y te regresa como resultado un JSON con
 el precio estimado del vehículo. Este sería nuestro único endpoint de la API (/precio-estimado). Como método HTTP,
@@ -168,7 +168,6 @@ JSON de entrada:
 
 ```
 {
-  "ID": "1001",
   "Price": 25000,
   "Levy": 1500,
   "Manufacturer": "Toyota",
@@ -195,7 +194,7 @@ JSON de salida:
 {precio: 1500}
 ```
 
-# Validaciones, códigos de error, y respuestas de los servicios asociados a cada funcionalidad.
+# 7. Validaciones, códigos de error, y respuestas de los servicios asociados a cada funcionalidad.
 
 ## En la página web
 
