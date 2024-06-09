@@ -1,4 +1,4 @@
-El siguiente contenido es nuestra solución para el reto de Desarrollo e Implantación de Sistemas de Software dirigido hacia la empresa MotorLeads.
+Este documento tiene como propósito proporcionar a nuestro socio formador una guía exhaustiva que muestre el procedimiento a seguir para desplegar y visualizar el proyecto desarrollado en un ambiente externo al nuestro. En este plan de despliegue, se detallarán todos los requisitos técnicos y de software necesarios, así como los comandos y pasos específicos que se deben ejecutar para lanzar la página web de manera exitosa.
 
 # Tabla de contenidos
 
